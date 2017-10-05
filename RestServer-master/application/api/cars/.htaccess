@@ -1,0 +1,18 @@
+#RewriteEngine On
+#RewriteBase /application/api/cars/
+#RewriteCond %{REQUEST_FILENAME} !^favicon\.ico
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule .* index.php [L]
+#DirectoryIndex ../../../index.php
+
+
+#home
+RewriteEngine On
+RewriteBase /~userN/REST/Server/api/shop/
+RewriteCond %{REQUEST_FILENAME} !^favicon\.ico
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php
+DirectoryIndex ../../../index.php
+

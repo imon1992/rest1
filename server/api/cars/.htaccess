@@ -1,0 +1,31 @@
+#DirectoryIndex index.php
+RewriteEngine On
+#RewriteBase /~user6/rest_task1/server/api/cars
+
+RewriteBase /rest123/server/api/cars
+#RewriteBase /server/api/cars
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php
+DirectoryIndex index.php
+
+#RewriteEngine On
+#RewriteBase /~user6/REST/server/api/cars/
+#RewriteBase /server/api/cars
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^.*$ index.php
+#DirectoryIndex index.php
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-s
+#RewriteRule ^(.*)$ index.php$1 [QSA,NC,L]
+
+#RewriteCond %{REQUEST_FILENAME} -d
+#RewriteRule ^(.*)$ index.php [QSA,NC,L]
+
+#RewriteCond %{REQUEST_FILENAME} -s
+#RewriteRule ^(.*)$ index.php [QSA,NC,L]
+#RewriteRule ^(.*)$ index.php?request=$1 [QSA,NC,L]
