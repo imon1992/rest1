@@ -1,0 +1,10 @@
+RewriteEngine On
+#RewriteBase /~user6/rest_task1/server/api/cars
+
+RewriteBase /rest123/server/api/auth
+#RewriteBase /server/api/cars
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php
+DirectoryIndex index.php

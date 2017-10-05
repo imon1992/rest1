@@ -8,6 +8,7 @@ class CarInfoSql
 
     public function __construct()
     {
+   //     var_dump($this->dbConnect);
 //        var_dump(MY_SQL_DB,MY_SQL_HOST,MY_SQL_DB_NAME,MY_SQL_USER,MY_SQL_PASSWORD);
         $baseAndHostDbName = MY_SQL_DB . ':host=' . MY_SQL_HOST . '; dbname=' . MY_SQL_DB_NAME;
         try {
@@ -16,6 +17,7 @@ class CarInfoSql
         } catch (PDOException $e) {
             $this->dbConect = 'connect error';
         }
+        //var_dump($this->dbConnect);
     }
 
     private function generateSortSql($paramArr)

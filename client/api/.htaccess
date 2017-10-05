@@ -1,4 +1,4 @@
 RewriteEngine On
 RewriteBase /api/
-#RewriteRule (.*) http://192.168.0.15/~user14/rest_task1/server/api/$1 [P]
-RewriteRule (.*) http://rest123/server/api/$1 [P]
+RewriteRule (.*) http://192.168.0.15/~user14/rest1/server/api/$1 [P]
+#RewriteRule (.*) http://rest123/server/api/$1 [P]

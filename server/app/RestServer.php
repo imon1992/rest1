@@ -1,14 +1,16 @@
 <?php
-include('Cars.php');
-include('config.php');
+//include('Cars.php');
+//include('config.php');
+//include_once('libs/CarInfoSql.php');
 
 class RestServer
 {
     protected $url;
     protected $requestMethod;
     protected $cars;
+    protected $contentType; 
 
-//    $this->setMethod('post'.ucfirst($dir), $_POST['params']);
+    //    $this->setMethod('post'.ucfirst($dir), $_POST['params']);
 
     public function __construct()
     {
@@ -24,61 +26,107 @@ class RestServer
 
     public function run()
     {
-        $url = '/~user14/rest_task1/server/api/cars/123';
-//        list($s, $user, $REST, $server, $api, $dir, $index, $class, $data) = explode("/", $this->url, 7);
-        list($s, $user, $REST, $server, $api, $dir, $index, $class, $data) = explode("/", $url, 7);
-        $returnFormat = explode(".", $url);
+        //$url = '/~user14/rest_task1/server/api/cars/123';
+        list($s, $user, $REST, $server, $api, $dir, $params) = explode("/", $this->url, 7);
+        //        list($s, $user, $REST, $server, $api, $dir, $params) = explode("/", $url, 7);
+        $returnFormat = explode(".", $this->url);
+
+        //var_dump($returnFormat);
+        // var_dump($class);
+        //var_dump($this->cars);
+        var_dump($params);
+     
+        if($returnFormat[1] === null)
+        {
+            $returnFormat = 'json';
+        }else
+        {
+            $returnFormat = $returnFormat[1];
+        }
+        //var_dump($returnFormat);
+        //var_dump($params);
         switch ($this->requestMethod) {
-            case 'GET':
-                $this->cars->setMethod('get' . ucfirst($dir),$returnFormat[1] ,explode('/', $index));
-                break;
-            case 'POST':
-                header("HTTP/1.1 501". $this->getStatusMessage('501'));
-                break;
-            case 'PUT':
-                header("HTTP/1.1 501". $this->getStatusMessage('501'));
-                break;
-            case 'DELETE':
-                header("HTTP/1.1 501". $this->getStatusMessage('501'));
-                break;
-            default: header("HTTP/1.1 501". $this->getStatusMessage('501'));
+        case 'GET':
+            return $this->setMethod('get' . ucfirst($dir),$returnFormat ,$params);
+            break;
+        case 'POST':
+            $this->sendHeaders(501);
+            break;
+        case 'PUT':
+            $this->sendHeaders(501);
+            break;
+        case 'DELETE':
+            $this->sendHeaders(501);
+            break;
+        default: $this->sendHeaders(501);
         }
     }
 
-    public function generateParams($paramStr)
+    private function generateParams($paramStr)
     {
-
-        if($paramStr === false){
+        //var_dump($paramStr);
+        if($paramStr === ''){
             return false;
         }
-        if(stristr($paramStr, '/') === false) {
+        if(stristr($paramStr, '=') === false) {
             return $paramStr;
         }else
         {
             $paramsArr =[];
-            $params = explode('/',$paramStr);
-            foreach($params as $value)
+            $params = explode('&',$paramStr);
+           // var_dump(is_array($params));
+
+            if(is_array($params))
             {
-                $keyVal = explode('=',$value);
-                $paramsArr[$keyVal[0]] = $keyVal[1];
-            }
-//            var_dump($paramsArr);
+
+                foreach($params as $value)
+                {
+                    $keyVal = explode('=',$value);
+                    $paramsArr[$keyVal[0]] = $keyVal[1];
+                }
+            } else
+                {
+                    $params = explode('=',$params);
+                    //var_dump($params);
+                    $paramsArr[$params[0]] = $params[1];
+                }
+
+            //var_dump($paramsArr);
             return $paramsArr;
         }
-//        $params = explode('/',$paramStr);
-//        var_dump($params);
+        //        $params = explode('/',$paramStr);
+        //        var_dump($params);
     }
-    protected function setMethod($classMethod, $returnFormat,$paramsStr = false)
+    protected function setMethod($classMethod, $returnFormat,$paramsStr )
     {
-        //var_dump($param);
+
+        //var_dump($paramsStr);
         $params = $this->generateParams($paramsStr);
+        //var_dump($paramsStr);
+        //var_dump($params);
+        //var_dump($returnFormat);
+        //var_dump($classMethod);
         if (method_exists($this->cars, $classMethod)) {
-            echo $this->cars->$classMethod($returnFormat,$params);
+            $result = $this->cars->$classMethod($returnFormat,$params);
+
+            if($result === 'unsupported format')
+            {
+                //echo 213423;
+                $this->sendHeaders(405);
+            }else
+            {
+                return  $this->cars->$classMethod($returnFormat,$params);
+            }
         } else {
-            header("HTTP/1.1 500". $this->getStatusMessage('500'));
+            $this->sendHeaders(500);
+            // header("HTTP/1.1 500". $this->getStatusMessage('500'));
         }
     }
 
+    private function sendHeaders($errorCode)
+    {
+        header("HTTP/1.1 $errorCode ". $this->getStatusMessage($errorCode));
+    }
     private function getStatusMessage($code){
         $status = array(
             100 => 'Continue',
@@ -125,10 +173,11 @@ class RestServer
         return ($status[$code])?$status[$code]:$status[500];
     }
 }
-
+//define("MY_SQL_DB",     "mysql");
 //$c = new RestServer();
 //$c->generateParams('color=red/model=bmw');
-//var_dump(MY_SQL_DB);
+//$c = MY_SQL_DB;
+//var_dump($c);
 //$c = new Cars();
 //$x = $c->getCars('xml',1);
 //var_dump($x);
