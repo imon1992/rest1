@@ -10,8 +10,8 @@ class RestServer
     public function __construct()
     {
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
-//        $this->url = $_SERVER['REQUEST_URI'];
-        $this->url = '/~user14/rest1/server/api/cars/model=x5/.xml';
+        $this->url = $_SERVER['REQUEST_URI'];
+//        $this->url = '/~user14/rest1/server/api/cars/model=x5/.xml';
         $this->cars = new Cars();
     }
 
@@ -55,7 +55,15 @@ class RestServer
 
     private function generateParams($paramStr)
     {
-        if (stristr($paramStr, '.') == true && stristr($paramStr, '=') == false) {
+       
+        //var_dump($paramStr);
+        if (stristr($paramStr, '.') == true && stristr($paramStr, '/') == true) 
+        {
+            $params = explode('/',$paramStr);
+            return $params[0];
+        }
+        if (stristr($paramStr, '.') == true && stristr($paramStr, '=') == false) 
+        {
             return false;
         }
         if ($paramStr === '') {

@@ -37,8 +37,8 @@ class AuthSql
         if($this->dbConnect !== 'connect error')
         {
             $stmt =$this->dbConnect->prepare('SELECT id,password
-                                              FROM users
-                                              WHERE login=:login');
+                FROM users
+                WHERE login=:login');
 
             $stmt->bindParam(':login',$login);
             $stmt->execute();
@@ -48,19 +48,19 @@ class AuthSql
             }
             return $result;
         }else
-        {
-            return 'error';
-        }
+            {
+                return 'error';
+            }
     }
 
     public function getIdHashByCookieId($id)
     {
         if($this->dbConnect !== 'connect error')
         {
-//            $query = mysql_query("SELECT hash,id,FROM users WHERE id = '".intval($_COOKIE['id'])."' LIMIT 1");
+            //            $query = mysql_query("SELECT hash,id,FROM users WHERE id = '".intval($_COOKIE['id'])."' LIMIT 1");
             $stmt =$this->dbConnect->prepare('SELECT hash,id
-                                              FROM users
-                                              WHERE id=:id');
+                FROM users
+                WHERE id=:id');
 
             $stmt->bindParam(':id',$id);
             $stmt->execute();
@@ -70,19 +70,19 @@ class AuthSql
             }
             return $result;
         }else
-        {
-            return 'error';
-        }
+            {
+                return 'error';
+            }
     }
 
     public function setNewHash($hash,$id)
     {
-//        mysql_query("UPDATE users SET hash='".$hash."' "." WHERE id='".$data['id']."'");
+        //        mysql_query("UPDATE users SET hash='".$hash."' "." WHERE id='".$data['id']."'");
         if($this->dbConnect !== 'connect error')
         {
             $stmt =$this->dbConnect->prepare('UPDATE users
-                                              SET hash= :hash
-                                              WHERE id=:id');
+                SET hash= :hash
+                WHERE id=:id');
 
             $stmt->bindParam(':hash',$hash);
             $stmt->bindParam(':id',$id);
@@ -99,8 +99,8 @@ class AuthSql
         if($this->dbConnect !== 'connect error')
         {
             $stmt =$this->dbConnect->prepare('SELECT id
-                                              FROM users
-                                              WHERE login=:login AND password=:password');
+                FROM users
+                WHERE login=:login AND password=:password');
 
             $stmt->bindParam(':login',$login);
             $stmt->bindParam(':password',$password);
@@ -115,13 +115,13 @@ class AuthSql
 
     public function checkUserLogin($login)
     {
-//        var_dump($login);
-//        $query = mysql_query("SELECT COUNT(user_id) FROM users WHERE user_login='".mysql_real_escape_string($_POST['login'])."'");
+        //        var_dump($login);
+        //        $query = mysql_query("SELECT COUNT(user_id) FROM users WHERE user_login='".mysql_real_escape_string($_POST['login'])."'");
         if($this->dbConnect !== 'connect error')
         {
             $stmt =$this->dbConnect->prepare('SELECT COUNT(id)
-                                              FROM users
-                                              WHERE login=:login');
+                FROM users
+                WHERE login=:login');
 
             $stmt->bindParam(':login',$login);
             $stmt->execute();

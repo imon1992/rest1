@@ -10,30 +10,42 @@ class RestServer
     public function __construct()
     {
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
-        $this->url = '/~user14/rest1/server/api/auth/test111/12345';
+        //$this->url = '/~user14/rest1/server/api/auth/test111/12345';
+        $this->url = $_SERVER['REQUEST_URI'];
         $this->auth = new Auth();
     }
 
     public function run()
     {
+        $this->generatePut($x);
         list($s, $user, $REST, $server, $api, $dir, $login, $password) = explode("/", $this->url, 8);
-//        var_dump($login, $password);
+        //        var_dump($login, $password);
 
         switch ($this->requestMethod) {
-            case 'GET':
-                return $this->setMethod('get' . ucfirst($dir), $login, $password);
-                break;
-            case 'POST':
-                return $this->setMethod('post' . ucfirst($dir), $login, $password);
-                break;
-            case 'PUT':
-                return $this->setMethod('put' . ucfirst($dir), $login, $password);
-                break;
-            case 'DELETE':
-                $this->sendHeaders(501);
-                break;
-            default:
-                $this->sendHeaders(501);
+        case 'GET':
+            return $this->setMethod('get' . ucfirst($dir), $login, $password);
+            break;
+        case 'POST':
+            $login = $_POST['login'];
+            $password = $_POST['password'];
+            
+            return $this->setMethod('post' . ucfirst($dir), $login, $password);
+            break;
+        case 'PUT':
+            $putData = file_get_contents('php://input');
+            $loginPswd = $this->generatePut($putData);
+            //var_dump($loginPswd['login']);
+            //var_dump($loginPswd['password']);
+            //$login = 'imon';
+            //$password = '360557zx';
+            return $this->setMethod('put' . ucfirst($dir), $loginPswd['login'], $loginPswd['password']);
+            //return $this->setMethod('put' . ucfirst($dir), $login, $password);
+            break;
+        case 'DELETE':
+            $this->sendHeaders(501);
+            break;
+        default:
+            $this->sendHeaders(501);
         }
     }
 
@@ -57,6 +69,21 @@ class RestServer
         } else {
             $this->sendHeaders(400);
         }
+    }
+
+    private function generatePut($putData)
+    {
+        $result =[];
+        $putArr = explode('&',$putData);
+
+        foreach($putArr as $value)
+        {
+            $params = explode('=',$value);
+            $result[$params[0]] = $params[1];
+        }
+
+        return $result;
+        //var_dump($result);
     }
 
     private function sendHeaders($errorCode)

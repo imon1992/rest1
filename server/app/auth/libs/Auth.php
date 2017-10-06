@@ -32,6 +32,7 @@ class Auth
     public function putAuth($login, $password)
     {
         $idPassword = $this->authSql->getIdPassByLogin($login);
+
         if ($idPassword[0]['password'] === md5(md5($password))) {
             $hash = md5($this->generateCode(10));
 
@@ -39,6 +40,11 @@ class Auth
             if ($result == true) {
                 setcookie("id", $idPassword[0]['id'], time() + 60 * 60 * 24 * 30);
                 setcookie("hash", $hash, time() + 60 * 60 * 24 * 30);
+     //$date = date("D, d M Y H:i:s",strtotime('1 January 2015')) . 'GMT';
+       //   header("Set-Cookie: {'id'}={'123'}; EXPIRES{$date};");
+                //var_dump($_COOKIE);
+                //var_dump($x);
+                //header('Set-cookie: foo1=bar11');
             }
 
 
@@ -52,11 +58,13 @@ class Auth
 
     public function getAuth($login = false,$password = false)
     {
+        //var_dump('cookie   '.$_COOKIE['hash']);
+        //var_dump('hash    '.$idHash[0]['hash']);
         if (isset($_COOKIE['id']) && isset($_COOKIE['hash'])) {
             $idHash = $this->authSql->getIdHashByCookieId($_COOKIE['id']);
 
-//        var_dump('cookie   '.$_COOKIE['hash']);
-//        var_dump('hash    '.$idHash[0]['hash']);
+        //var_dump('cookie   '.$_COOKIE['hash']);
+        //var_dump('hash    '.$idHash[0]['hash']);
             if (($idHash[0]['hash'] !== $_COOKIE['hash']) or ($idHash[0]['id'] !== $_COOKIE['id']))
             {
                 setcookie("id", "", time() - 3600 * 24 * 30 * 12, "/");
