@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1f7c963-0665-42a4-afbf-6da32cc71a12" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/api/.htaccess" afterPath="$PROJECT_DIR$/client/api/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/api/cars/.htaccess" afterPath="$PROJECT_DIR$/server/api/cars/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/app/RestServer.php" afterPath="$PROJECT_DIR$/server/app/RestServer.php" />
+      <change type="DELETED" beforePath="C:\OpenServer\domains\rest123\server\api\cars\config.php" afterPath="" />
+      <change type="MOVED" beforePath="C:\OpenServer\domains\rest123\server\app\Cars.php" afterPath="$PROJECT_DIR$/server/app/cars/libs/Cars.php" />
+      <change type="MOVED" beforePath="C:\OpenServer\domains\rest123\server\app\RestServer.php" afterPath="$PROJECT_DIR$/server/app/cars/RestServer.php" />
+      <change type="MOVED" beforePath="C:\OpenServer\domains\rest123\server\app\libs\CarInfoSql.php" afterPath="$PROJECT_DIR$/server/app/cars/libs/CarInfoSql.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/app/config.php" afterPath="$PROJECT_DIR$/server/app/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/api/auth/index.php" afterPath="$PROJECT_DIR$/server/api/auth/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/api/cars/index.php" afterPath="$PROJECT_DIR$/server/api/cars/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -29,70 +32,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RestServer.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/server/app/RestServer.php">
+      <file leaf-file-name="RestServer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/app/auth/RestServer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2685026" vertical-offset="1068" max-vertical-offset="2465">
-              <caret line="72" column="27" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="27" />
+            <state vertical-scroll-proportion="-5.230769" vertical-offset="238" max-vertical-offset="2006">
+              <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".htaccess" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/api/.htaccess">
+      <file leaf-file-name="Auth.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/app/auth/libs/Auth.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
-              <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.29929578" vertical-offset="833" max-vertical-offset="1581">
+              <caret line="59" column="99" selection-start-line="59" selection-start-column="99" selection-end-line="59" selection-end-column="99" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/api/cars/index.php">
+      <file leaf-file-name="AuthSql.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/app/auth/libs/AuthSql.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="221">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cars.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/app/Cars.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.153846" vertical-offset="150" max-vertical-offset="1802">
-              <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+            <state vertical-scroll-proportion="-4.2727275" vertical-offset="1754" max-vertical-offset="2397">
+              <caret line="117" column="13" selection-start-line="117" selection-start-column="10" selection-end-line="117" selection-end-column="13" />
               <folding>
-                <marker date="1507198581563" expanded="true" signature="1504:1917" placeholder="..." />
-                <marker date="1507198581563" expanded="true" signature="1573:1598" placeholder="..." />
-                <marker date="1507198581563" expanded="true" signature="1573:1889" placeholder="..." />
+                <marker date="1507286034808" expanded="true" signature="638:712" placeholder="INSERT INTO ..." />
+                <marker date="1507286034808" expanded="true" signature="1110:1250" placeholder="SELECT id,pa..users..." />
+                <marker date="1507286034808" expanded="true" signature="1702:1775" placeholder="SELECT hash,..users..." />
+                <marker date="1507286034808" expanded="true" signature="1825:1955" placeholder="SELECT hash,..users..." />
+                <marker date="1507286034808" expanded="true" signature="2326:2390" placeholder="UPDATE users..." />
+                <marker date="1507286034808" expanded="true" signature="2499:2630" placeholder="SELECT id,pa..users..." />
+                <marker date="1507286034808" expanded="true" signature="2499:2632" placeholder="UPDATE users..." />
+                <marker date="1507286034808" expanded="true" signature="3019:3173" placeholder="SELECT id FR..users..." />
+                <marker date="1507286034808" expanded="true" signature="3555:3652" placeholder="SELECT COUNT..users..." />
+                <marker date="1507286034808" expanded="true" signature="3761:3899" placeholder="SELECT COUNT..users..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CarInfoSql.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/app/libs/CarInfoSql.php">
+      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/register/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.115385" vertical-offset="1530" max-vertical-offset="2805">
-              <caret line="107" column="39" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="39" />
+            <state vertical-scroll-proportion="-15.692307" vertical-offset="102" max-vertical-offset="1496">
+              <caret line="30" column="69" selection-start-line="30" selection-start-column="69" selection-end-line="30" selection-end-column="69" />
               <folding>
-                <marker date="1507192071365" expanded="true" signature="2299:2347" placeholder="SELECT id, m..cars..." />
-                <marker date="1507192071365" expanded="true" signature="2794:2901" placeholder="SELECT model..." />
-                <marker date="1507192071365" expanded="true" signature="4236:4390" placeholder="INSERT INTO ..." />
+                <marker date="1507279888987" expanded="true" signature="464:562" placeholder="SELECT id, p..users..." />
+                <marker date="1507279888987" expanded="true" signature="959:1023" placeholder="UPDATE users..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/app/config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="238">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -115,12 +104,21 @@
         <option value="$PROJECT_DIR$/client/api/cars/.htaccess" />
         <option value="$PROJECT_DIR$/client/api/.htaccess" />
         <option value="$PROJECT_DIR$/server/api/cars/.htaccess" />
-        <option value="$PROJECT_DIR$/server/api/cars/index.php" />
         <option value="$PROJECT_DIR$/server/app/libs/server1.php" />
-        <option value="$PROJECT_DIR$/server/app/config.php" />
         <option value="$PROJECT_DIR$/server/app/libs/CarInfoSql.php" />
+        <option value="$PROJECT_DIR$/server/app/config.php" />
         <option value="$PROJECT_DIR$/server/app/Cars.php" />
         <option value="$PROJECT_DIR$/server/app/RestServer.php" />
+        <option value="$PROJECT_DIR$/server/api/cars/index.php" />
+        <option value="$PROJECT_DIR$/server/app/cars/libs/CarInfoSql.php" />
+        <option value="$PROJECT_DIR$/server/app/cars/libs/Cars.php" />
+        <option value="$PROJECT_DIR$/server/api/auth/index.php" />
+        <option value="$PROJECT_DIR$/server/app/cars/RestServer.php" />
+        <option value="$PROJECT_DIR$/register/register.php" />
+        <option value="$PROJECT_DIR$/register/login.php" />
+        <option value="$PROJECT_DIR$/server/app/auth/libs/AuthSql.php" />
+        <option value="$PROJECT_DIR$/server/app/auth/RestServer.php" />
+        <option value="$PROJECT_DIR$/server/app/auth/libs/Auth.php" />
       </list>
     </option>
   </component>
@@ -159,7 +157,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -200,7 +197,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -217,6 +214,22 @@
               <option name="myItemId" value="rest123" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cars" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -228,16 +241,71 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="auth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rest123" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rest123" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="auth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rest123" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rest123" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rest123" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rest123" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -245,6 +313,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -254,11 +323,11 @@
       <recent name="D:\OpenServer\domains\rest\server\api" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\OpenServer\domains\rest123\server\app\cars\libs" />
       <recent name="C:\OpenServer\domains\rest123\server\app" />
+      <recent name="C:\OpenServer\domains\rest123\server\app\cars" />
       <recent name="D:\OpenServer\domains\rest\server\api" />
       <recent name="D:\OpenServer\domains\rest\server\api\db\cars" />
-      <recent name="D:\OpenServer\domains\rest\client\api\cars" />
-      <recent name="D:\OpenServer\domains\rest\server\api\db" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -303,6 +372,9 @@
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="b1f7c963-0665-42a4-afbf-6da32cc71a12" name="Default" comment="" />
@@ -388,7 +460,111 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/app/RestServer.php">
+    <entry file="file://$PROJECT_DIR$/server/app/cars/RestServer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1278" max-vertical-offset="3247">
+          <caret line="102" column="10" selection-start-line="102" selection-start-column="10" selection-end-line="102" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/api/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="170">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/api/cars/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="255">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/cars/libs/Cars.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/cars/libs/CarInfoSql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1564" max-vertical-offset="2856">
+          <caret line="109" column="39" selection-start-line="109" selection-start-column="39" selection-end-line="109" selection-end-column="39" />
+          <folding>
+            <marker date="1507273605922" expanded="true" signature="-1:-1" placeholder="SELECT id, m..cars..." />
+            <marker date="1507273605922" expanded="true" signature="-1:-1" placeholder="SELECT model..." />
+            <marker date="1507273605922" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="255">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/cars/RestServer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/api/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="153">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/api/cars/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="221">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/cars/libs/Cars.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="1802">
+          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/cars/libs/CarInfoSql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="2805">
+          <caret line="107" column="39" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="39" />
+          <folding>
+            <marker date="1507273605922" expanded="true" signature="-1:-1" placeholder="SELECT id, m..cars..." />
+            <marker date="1507273605922" expanded="true" signature="-1:-1" placeholder="SELECT model..." />
+            <marker date="1507273605922" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="238">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/cars/RestServer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="884">
           <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
@@ -400,7 +576,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -408,7 +583,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="442">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -420,7 +594,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app/RestServer.php">
+    <entry file="file://$PROJECT_DIR$/server/app/cars/RestServer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -432,15 +606,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/api/cars/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="629">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -448,7 +613,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -456,7 +620,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -464,7 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -472,7 +634,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -480,19 +641,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/api/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.056013178" vertical-offset="0" max-vertical-offset="607">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/api/cars/config.php">
+    <entry file="file://$PROJECT_DIR$/server/app/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11703958" vertical-offset="0" max-vertical-offset="581">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/api/auth/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -500,50 +668,110 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app/config.php">
+    <entry file="file://$PROJECT_DIR$/server/api/cars/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="238">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.27182865" vertical-offset="22" max-vertical-offset="629">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app/libs/CarInfoSql.php">
+    <entry file="file://$PROJECT_DIR$/server/app/cars/libs/Cars.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.115385" vertical-offset="1530" max-vertical-offset="2805">
-          <caret line="107" column="39" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="39" />
-          <folding>
-            <marker date="1507192071365" expanded="true" signature="2299:2347" placeholder="SELECT id, m..cars..." />
-            <marker date="1507192071365" expanded="true" signature="2794:2901" placeholder="SELECT model..." />
-            <marker date="1507192071365" expanded="true" signature="4236:4390" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/app/Cars.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.153846" vertical-offset="150" max-vertical-offset="1802">
-          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-          <folding>
-            <marker date="1507198581563" expanded="true" signature="1504:1917" placeholder="..." />
-            <marker date="1507198581563" expanded="true" signature="1573:1598" placeholder="..." />
-            <marker date="1507198581563" expanded="true" signature="1573:1889" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.11703958" vertical-offset="51" max-vertical-offset="1785">
+          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/api/cars/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="221">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.26333907" vertical-offset="0" max-vertical-offset="581">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app/RestServer.php">
+    <entry file="file://$PROJECT_DIR$/server/api/auth/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2685026" vertical-offset="1068" max-vertical-offset="2465">
-          <caret line="72" column="27" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.17555939" vertical-offset="0" max-vertical-offset="581">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/register/register.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5851979" vertical-offset="0" max-vertical-offset="581">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <marker date="1507279123609" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/cars/RestServer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029259896" vertical-offset="204" max-vertical-offset="2686">
+          <caret line="13" column="60" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/cars/libs/CarInfoSql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52667814" vertical-offset="969" max-vertical-offset="2856">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="78" selection-end-column="13" />
+          <folding>
+            <marker date="1507273605922" expanded="true" signature="-1:-1" placeholder="SELECT id, m..cars..." />
+            <marker date="1507273605922" expanded="true" signature="-1:-1" placeholder="SELECT model..." />
+            <marker date="1507273605922" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/register/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.692307" vertical-offset="102" max-vertical-offset="1496">
+          <caret line="30" column="69" selection-start-line="30" selection-start-column="69" selection-end-line="30" selection-end-column="69" />
+          <folding>
+            <marker date="1507279888987" expanded="true" signature="464:562" placeholder="SELECT id, p..users..." />
+            <marker date="1507279888987" expanded="true" signature="959:1023" placeholder="UPDATE users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/auth/RestServer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.230769" vertical-offset="238" max-vertical-offset="2006">
+          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/auth/libs/AuthSql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.2727275" vertical-offset="1754" max-vertical-offset="2397">
+          <caret line="117" column="13" selection-start-line="117" selection-start-column="10" selection-end-line="117" selection-end-column="13" />
+          <folding>
+            <marker date="1507286034808" expanded="true" signature="638:712" placeholder="INSERT INTO ..." />
+            <marker date="1507286034808" expanded="true" signature="1110:1250" placeholder="SELECT id,pa..users..." />
+            <marker date="1507286034808" expanded="true" signature="1702:1775" placeholder="SELECT hash,..users..." />
+            <marker date="1507286034808" expanded="true" signature="1825:1955" placeholder="SELECT hash,..users..." />
+            <marker date="1507286034808" expanded="true" signature="2326:2390" placeholder="UPDATE users..." />
+            <marker date="1507286034808" expanded="true" signature="2499:2630" placeholder="SELECT id,pa..users..." />
+            <marker date="1507286034808" expanded="true" signature="2499:2632" placeholder="UPDATE users..." />
+            <marker date="1507286034808" expanded="true" signature="3019:3173" placeholder="SELECT id FR..users..." />
+            <marker date="1507286034808" expanded="true" signature="3555:3652" placeholder="SELECT COUNT..users..." />
+            <marker date="1507286034808" expanded="true" signature="3761:3899" placeholder="SELECT COUNT..users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/auth/libs/Auth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29929578" vertical-offset="833" max-vertical-offset="1581">
+          <caret line="59" column="99" selection-start-line="59" selection-start-column="99" selection-end-line="59" selection-end-column="99" />
           <folding />
         </state>
       </provider>

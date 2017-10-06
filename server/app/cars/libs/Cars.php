@@ -1,7 +1,5 @@
 <?php
 
-//include('libs/CarInfoSql.php');
-
 class Cars
 {
 
@@ -14,10 +12,8 @@ class Cars
 
     public function getCars($returnFormat, $params = false)
     {
-        //var_dump($params);
         if ($params === false) {
             $result = $this->carSql->getCarMarkAndModel();
-            //var_dump($this->carSql->getCarMarkAndModel());
         }
 
         if (is_array($params)) {
@@ -26,15 +22,13 @@ class Cars
         if (is_string($params) || is_integer($params)) {
             $result = $this->carSql->getModelYearAmountColorSpeedPrice($params);
         }
-        //var_dump($result);
-        //var_dump($returnFormat);
+
         $format = 'format' . strtoupper($returnFormat);
-        //var_dump($format);
-        //
+
         if (method_exists($this, $format)) {
             $formatResult = $this->$format($result);
         } else {
-            return 'unsupported format'; 
+            return 'unsupported format';
         }
 
         return $formatResult;
@@ -44,16 +38,15 @@ class Cars
 
     private function formatJSON($data)
     {
+        header("Content-type: application/json");
         return json_encode($data);
-        //        var_dump(json_encode($this->carSql->getCarMarkAndModel()));
     }
 
     private function formatXML($data)
     {
-        //        var_dump($data);
-        //        $data = $this->carSql->getCarMarkAndModel();
-        //        var_dump($data);
-        $xml = '';
+        header("Content-type: text/xml");
+        $xml = '<?xml version="1.0" encoding="ISO-8859-1"?>
+<cars>';
         foreach ($data as $carInfo) {
             $xml .= '<car>' . "\r\n";
             foreach ($carInfo as $key => $param) {
@@ -61,53 +54,46 @@ class Cars
             }
             $xml .= '</car>' . "\r\n";
         }
+        $xml .= '</cars>';
+
         return $xml;
     }
 
     private function formatHTML($data)
     {
-        //                $data = $this->carSql->getCarsInfoByParams();
-        //        var_dump($data);
+        header("Content-type: text/html");
         $html = '<!DOCTYPE html>
             <html>
             <head></head>
             <body>
+            <pre>
             ';
         foreach ($data as $carInfo) {
             $html .= '<div>' . "\r\n";
             foreach ($carInfo as $key => $param) {
-                $html .= "<p>" . $key .': '.$param . "</p>" . "\r\n";
+                $html .= "<p>" . $key . ': ' . $param . "</p>" . "\r\n";
             }
             $html .= '</div>' . "\r\n";
         }
 
-        $html .= '</body>
+        $html .= '</pre></body>
             </html>';
-        var_dump($html);
+
         return $html;
     }
 
     private function formatTXT($data)
     {
-        //                        $data = $this->carSql->getCarMarkAndModel();
-        //        var_dump($data);
+        header("Content-type: text/plain");
         $txt = '';
         foreach ($data as $key => $carInfo) {
             $txt .= 'car: ' . "$key\r\n";
             foreach ($carInfo as $key => $param) {
                 $txt .= "$key: " . $param . "\r\n";
             }
-            //            $txt .= '</div>'."\r\n";
         }
 
-        //        var_dump($txt);
         return $txt;
     }
 
-    //return var_dump($data) . '<br>Hello!?!?!?!? ';
-
-
 }
-
-//$c = new Cars();
-//$c->formData('sa');
