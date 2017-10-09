@@ -4,44 +4,36 @@ class RestServer
 {
     protected $url;
     protected $requestMethod;
-    protected $cars;
+    protected $orders;
     protected $contentType;
 
     public function __construct()
     {
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
 //        $this->url = $_SERVER['REQUEST_URI'];
-        $this->url = '/~user14/rest1/server/api/cars/1';
-        $this->cars = new Cars();
+        $this->url = '/~user14/rest1/server/api/orders/1';
+        $this->orders = new Orders();
     }
 
     public function run()
     {
-//        var_dump($this->url);
         list($s, $user, $REST, $server, $api, $dir, $params) = explode("/", $this->url, 7);
-        //$url = '/~user14/rest_task1/server/api/cars/123';
-//        list($s, $user, $REST, $server, $api, $dir, $params) = explode("/", $this->url, 7);
-//        //        list($s, $user, $REST, $server, $api, $dir, $params) = explode("/", $url, 7);
-//        $returnFormat = explode(".", $this->url);
-//
-//        if ($returnFormat[1] === null) {
-//            $returnFormat = 'json';
-//        } else {
-//            $returnFormat = $returnFormat[1];
-//        }
-
+//        return $this->requestMethod;
         switch ($this->requestMethod) {
             case 'GET':
-                $returnFormat = explode(".", $this->url);
-                if ($returnFormat[1] === null) {
-                    $returnFormat = 'json';
-                } else {
-                    $returnFormat = $returnFormat[1];
-                }
-                return $this->setMethod('get' . ucfirst($dir), $returnFormat, $params);
+//                $params = $_GET['userId'];
+//                return $params;
+                return $this->setMethod('get' . ucfirst($dir),$params);
                 break;
             case 'POST':
-                $this->sendHeaders(501);
+//                $postParams = ''
+
+                $postParams['carId'] = json_decode($_POST['carId']);
+                $postParams['userId'] = json_decode($_POST['userId']);
+                $postParams['fName'] = json_decode($_POST['fName']);
+                $postParams['lName'] = json_decode($_POST['lName']);
+                $postParams['paymentMethod'] = json_decode($_POST['paymentMethod']);
+                return $this->setMethod('post' . ucfirst($dir), $postParams);
                 break;
             case 'PUT':
                 $this->sendHeaders(501);
@@ -54,58 +46,24 @@ class RestServer
         }
     }
 
-    private function generateParams($paramStr)
+    protected function setMethod($classMethod, $params)
     {
-       
-        //var_dump($paramStr);
-        if (stristr($paramStr, '.') == true && stristr($paramStr, '/') == true) 
-        {
-            $params = explode('/',$paramStr);
-            return $params[0];
-        }
-        if (stristr($paramStr, '.') == true && stristr($paramStr, '=') == false) 
-        {
-            return false;
-        }
-        if ($paramStr === '') {
-            return false;
-        }
-        if (stristr($paramStr, '=') === false) {
-            return $paramStr;
-        } else {
-            $paramsArr = [];
-            $paramStr = explode('/', $paramStr);
-            $params = explode('&', $paramStr[0]);
+//        return $classMethod;
+        if (method_exists($this->orders, $classMethod)) {
+            if ($params != null) {
 
-            if (is_array($params)) {
+                $result = $this->orders->$classMethod($params);
 
-                foreach ($params as $value) {
-                    $keyVal = explode('=', $value);
-                    $paramsArr[$keyVal[0]] = $keyVal[1];
+                if ($result === 'error') {
+                    $this->sendHeaders(405);
+                } else {
+                    $this->sendHeaders(200);
                 }
-            } else {
-                $params = explode('=', $params);
-                $paramsArr[$params[0]] = $params[1];
-            }
-
-            return $paramsArr;
-        }
-    }
-
-    protected function setMethod($classMethod, $returnFormat, $paramsStr)
-    {
-        $params = $this->generateParams($paramsStr);
-        if (method_exists($this->cars, $classMethod)) {
-            $result = $this->cars->$classMethod($returnFormat, $params);
-            if ($result === 'unsupported format') {
-                $this->sendHeaders(405);
-            } else {
-                $this->sendHeaders(200);
-                return $result;
             }
         } else {
             $this->sendHeaders(500);
         }
+        return $result;
     }
 
     private function sendHeaders($errorCode)

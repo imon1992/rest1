@@ -34,17 +34,29 @@ class Auth
         $idPassword = $this->authSql->getIdPassByLogin($login);
 
         if ($idPassword[0]['password'] === md5(md5($password))) {
+//            session_start();
+//            $_SESSION['userid'] = 10;
+//            return $_SESSION;
+//var_dump($_SESSION['userid']);
+//            $result = true;
             $hash = md5($this->generateCode(10));
 
             $result = $this->authSql->setNewHash($hash, $idPassword[0]['id']);
             if ($result == true) {
-                setcookie("id", $idPassword[0]['id'], time() + 60 * 60 * 24 * 30);
-                setcookie("hash", $hash, time() + 60 * 60 * 24 * 30);
+                $result =[];
+                $result['id'] = $idPassword[0]['id'];
+                $result['hash'] = $hash;
+//                setcookie("id", $idPassword[0]['id'], time() + 60 * 60 * 24 * 30,'/');
+//                setcookie("hash", $hash, time() + 60 * 60 * 24 * 30,'/');
      //$date = date("D, d M Y H:i:s",strtotime('1 January 2015')) . 'GMT';
        //   header("Set-Cookie: {'id'}={'123'}; EXPIRES{$date};");
                 //var_dump($_COOKIE);
                 //var_dump($x);
                 //header('Set-cookie: foo1=bar11');
+//                var_dump($_COOKIE);
+            }else
+            {
+                $result = false;
             }
 
 
@@ -56,27 +68,46 @@ class Auth
 
     }
 
-    public function getAuth($login = false,$password = false)
+    public function getAuth($id,$hash)
     {
-        //var_dump('cookie   '.$_COOKIE['hash']);
+//        var_dump('cookie   '.$_COOKIE['hash']);
         //var_dump('hash    '.$idHash[0]['hash']);
-        if (isset($_COOKIE['id']) && isset($_COOKIE['hash'])) {
-            $idHash = $this->authSql->getIdHashByCookieId($_COOKIE['id']);
+//        var_dump($_COOKIE);
+//        echo $_COOKIE;
+//        return $_COOKIE;
+//        session_start();
+//        return $_SESSION['userid'];
+////        var_dump($_SESSION);
+//        if(isset($_SESSION['userid']))    {
+//            $result =  true;
+//        }else{
+//            $result =  false;
+//        }
+//        return $id;
+        if ($id !== 'undefined' && $hash !== 'undefined') {
+            $idHash = $this->authSql->getIdHashByCookieId($id);
 
-        //var_dump('cookie   '.$_COOKIE['hash']);
-        //var_dump('hash    '.$idHash[0]['hash']);
-            if (($idHash[0]['hash'] !== $_COOKIE['hash']) or ($idHash[0]['id'] !== $_COOKIE['id']))
+//        var_dump('cookie   '.$_COOKIE['hash']);
+//        var_dump('hash    '.$idHash[0]['hash']);
+            if (($idHash[0]['hash'] !== $hash) || ($idHash[0]['id'] !== $id))
             {
-                setcookie("id", "", time() - 3600 * 24 * 30 * 12, "/");
-                setcookie("hash", "", time() - 3600 * 24 * 30 * 12, "/");
+//                setcookie("id", "", time() - 3600 * 24 * 30 * 12, "/");
+//                setcookie("hash", "", time() - 3600 * 24 * 30 * 12, "/");
 
                 $result = false;
             } else {
                 $result = true;
             }
         } else {
-            $result = 'cookies is off';
+            $result = false;
         }
+//        var_dump()
+        return $result;
+    }
+
+    public function deleteAuth()
+    {
+        $result = session_destroy();
         return $result;
     }
 
@@ -93,3 +124,6 @@ class Auth
     }
 
 }
+
+//$c = new Auth();
+//$x = $c->getAuth();

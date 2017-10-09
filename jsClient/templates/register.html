@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input  class="form-control" id="login" placeholder="Login"
+                v-model="login">
+            </div>
+            <div v-if="errorLogin !== ''" class="error">
+                    {{errorLogin}}
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password"
+                v-model="password">
+            </div>
+            <div v-if="errorPassword !== ''" class="error">
+                {{errorPassword}}
+            </div>
+            <button type="submit" class="btn btn-default" v-on:click="sendRegister">register</button>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            login: '',
+            password: '',
+            errorLogin: '',
+            errorPassword: '',
+        },
+        methods: {
+            sendRegister: function () {
+                if(this.login == '')
+                {
+                    this.errorLogin = 'This field is compulsory';
+                }else
+                {
+                    this.errorLogin = '';
+                }
+                if(this.password == '')
+                {
+                    this.errorPassword = 'This field is compulsory';
+                }else
+                {
+                    this.errorPassword = '';
+                }
+
+                if(this.login != '' &&  this.password != '')
+                {
+                    var login = JSON.stringify(this.login);
+                    var password = JSON.stringify(this.password);
+                    fetch('http://rest123/server/api/auth/', {
+                        method: 'post',
+                        headers: {  
+                            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+                        },  
+                        body: 'login='+login+'&password='+password
+                    })
+                        .then(this.status)
+                        .then(this.json)
+                        .then(function (data) {
+                            if(data == true){
+                                window.location = 'http://rest123/jsClient/templates/login.html';
+                            }else
+                            {
+                                alert('register error');
+                            }
+                        });
+                }
+                
+            },
+            status: function (response) {
+                if (response.status >= 200 && response.status < 300) {
+                    return Promise.resolve(response)
+                } else {
+                    return Promise.reject(new Error(response.statusText))
+                }
+            },
+            json: function (response, self) {
+                return response.json()
+            }
+        },
+        created() {
+        }
+
+
+    })
+
+</script>
+<style scoped>
+.error{
+    color: red;
+}
+</style>
+
+</html>

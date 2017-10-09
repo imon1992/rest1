@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+<div id="app">
+    <div v-if="loginStatusGet === false"class="row">
+        <button type="button" class="btn btn-success login" v-on:click="register">Register</button>
+        <button type="button" class="btn btn-success register" v-on:click="login">Login</button>
+    </div>
+    <div v-else class="row">
+            <button v-on:click="showBag" type="button" class="btn btn-success bag">Bag</button>
+    </div>
+    <div class="row text-center">
+        <div class="dropdowns">
+            <div class="col-md-2">
+                <label> select model  </label>
+            <select class="form-control select" v-model="model">
+                    <option value="">none</option>
+                    <option  v-for="model in options.models" 
+                    :value="model.value" >{{model.value}}</option>
+            </select>
+        </div>
+    
+            <div class="col-md-2">
+                <label> select year  </label>
+                <select class="form-control select" v-model="year">
+                        <option value="">none</option>
+                        <option  v-for="year in options.years" 
+                        :value="year.value" >{{year.value}}</option>
+                </select>
+                <div v-bind:class="{ error: errorStatus }">
+                    {{error}}
+                </div>
+            </div>
+    
+            <div class="col-md-2">
+                <label> select engine </label>
+                <select class="form-control select" v-model="engine">
+                        <option value="">none</option>
+                        <option  v-for="engine in options.engines" 
+                        :value="engine.value" >{{engine.value}}</option>
+                </select>
+            </div>
+    
+            <div class="col-md-2">
+                <label> select color </label>
+                <select class="form-control select" v-model="color">
+                        <option value="">none</option>
+                        <option  v-for="color in options.colors" 
+                        :value="color.value" >{{color.value}}</option>
+                </select>
+            </div>
+    
+            <div class="col-md-2">
+                <label> select maxSpeed </label>
+                <select class="form-control select" v-model="maxSpeed">
+                        <option value="">none</option>
+                        <option  v-for="maxSpeed in options.maxSpeeds" 
+                        :value="maxSpeed.value" >{{maxSpeed.value}}</option>
+                </select>
+
+            </div>
+    
+            <div class="col-md-2">
+                <label> select price </label>
+                <select class="form-control select" v-model="price">
+                        <option value="">none</option>
+                        <option  v-for="price in options.prices" 
+                        :value="price.value" >{{price.value}}</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <button id="filterBtn" type="button" class="btn btn-info" v-on:click="applyFilter">apply filter</button>
+        </div>
+    </div>
+    <div class="row text-center">
+    <div class=".contentBlock">
+            <div class="col-md-4" v-for="car in cars">
+                <a :href=carUrl+car.id>
+                    <p>{{car.mark}}</p>
+                    <p>{{car.model}}</p>
+                </a>
+            </div>
+    </div>
+    </div>
+</div>
+</body>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            cars: {},
+            model: '',
+            year: '',
+            engine: '',
+            color: '',
+            maxSpeed: '',
+            price: '',
+            error: 'This field is compulsory',
+            errorStatus: true,
+            loginStatus: false,
+            carUrl: 'http://rest123/jsClient/templates/car.html?car=',
+            options: {
+                models: [
+                    {
+                        'value': 'X5',
+                    },
+                    {
+                        'value': 'X6',
+                    }
+                ],
+                years: [
+                    {
+                        'value': 2016
+                    },
+                    {
+                        'value': 2010
+                    }
+                ],
+                engines: [
+                    {
+                        'value': 2.4
+                    },
+                    {
+                        'value': 1.6
+                    }
+                ],
+                colors: [
+                    {
+                        'value': 'red'
+                    },
+                    {
+                        'value': 'black'
+                    }
+                ],
+                maxSpeeds: [
+                    {
+                        'value': '150-200'
+                    },
+                    {
+                        'value': '200-250'
+                    }
+                ],
+                prices: [
+                    {
+                        'value': '1000-10000'
+                    },
+                    {
+                        'value': '10000-20000'
+                    },
+                    {
+                        'value': '20000-50000'
+                    }
+                ]
+            }
+        },
+        methods: {
+            login: function () {
+                window.location = 'http://rest123/jsClient/templates/login.html';
+            },
+            register: function () {
+                window.location = 'http://rest123/jsClient/templates/register.html';
+            },
+            applyFilter: function () {
+                console.log(this.loginStatus);
+                var sortObj = {};
+                if(this.model != ''){
+                    sortObj.model = this.model;
+                }
+                if(this.year != ''){
+                    sortObj.year = this.year;
+                    this.errorStatus = true;
+                }else{
+                    this.errorStatus = false;
+                    return;
+                }
+                if(this.engine != ''){
+                    sortObj.engine = this.engine;
+                }
+                if(this.color != ''){
+                    sortObj.color = this.color;
+                }
+                if(this.maxSpeed != ''){
+                    var maxSpeedArr = this.maxSpeed.split('-');
+                    sortObj.maxSpeed = maxSpeedArr;
+                }
+                if(this.price != ''){
+                    var priceArr = this.price.split('-');
+                    sortObj.price = priceArr;
+                }
+                var urlPart = '';
+                for(el in sortObj) {
+                    urlPart += el+'='+sortObj[el]+'/';
+                }
+
+                fetch('http://rest123/server/api/cars/'+urlPart,{  
+                        method: 'get'})
+                    .then(this.status)
+                    .then(this.json)
+                    .then(function(data){
+                        self.loginStats = data;          
+                });
+            },
+            showBag: function () {
+                window.location.href = 'http://rest123/jsClient/templates/bag.html'
+            },
+            status: function (response) { 
+                // console.log(response.type);
+                if (response.status >= 200 && response.status < 300) {  
+                    return Promise.resolve(response)  
+                } else {  
+                    return Promise.reject(new Error(response.statusText))  
+                }  
+            },
+            json: function(response,self) {
+                // console.log(this.cars);
+                // console.log(self);
+                return response.json()  
+            },
+            getCookie: function (name) {
+                var matches = document.cookie.match(new RegExp(
+                    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+                ));
+                return matches ? decodeURIComponent(matches[1]) : undefined;
+            }
+        },
+        created () {
+            var self = this;
+                    // console.log(self.cars);
+            fetch('http://rest123/server/api/cars/',{  
+                    method: 'get'})
+                .then(this.status)
+                .then(this.json)
+                .then(function(data){
+                    // console.log(data);
+                    // console.log(self.cars);
+                    self.cars = data;          
+                });
+
+
+            // var x = this.ajaxRequest(,);
+            // console.log(x);
+            
+        },
+        computed: {
+            loginStatusGet () {
+                var self = this;
+                var id = this.getCookie('id');
+                var hash = this.getCookie('hash');
+                // var x = '';
+                // console.log(document.cookie);
+                // console.log(this.$cookie.get)
+                // console.log(id);
+                // console.log(hash);
+                fetch('http://rest123/server/api/auth?id='+id+'&hash='+hash,{  
+                    method: 'get'})
+                .then(this.status)
+                .then(this.json)
+                .then(function(data){
+                    console.log(data);
+                    // x =  data;
+                    // console.log(data);
+                    // console.log(data);
+                    // console.log(self.cars);
+                    self.loginStatus = data;          
+                });
+                // console.log(x);
+                return this.loginStatus;
+                // console.log(data);
+            }
+        }
+
+        
+    })
+</script>
+<style scoped>
+    .dropdowns{
+    height: 80px;
+}
+
+.error{
+    display: none;
+    color: red;
+}
+.login, .register, .logout, .bag{
+    float: right;
+    margin-right: 50px;
+}
+</style>
+</html>

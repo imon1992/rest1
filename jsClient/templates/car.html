@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+<div id="app">
+        <div v-if="showOrderForm !== false" class="row">
+                <button v-on:click="showBag" type="button" class="btn btn-success bag">Bag</button>
+        </div>
+    <div class="carInfo col-md-2">
+        <!-- <p>{{car.marl}}</p> -->
+        <p>Model: {{car.model}}</p>
+        <p>Year of issue: {{car.year}}</p>
+        <p>Color: {{car.color}}</p>
+        <p>Engine capacity: {{car.engine}}</p>
+        <p>Max speed: {{car.maxSpeed}}</p>
+        <p>Price: {{car.price}}</p>
+        <button  v-on:click="checkLogin"class="btn">Order car</button>
+    </div>
+    <div  v-if="showOrderForm !== false" class="order col-md-2">
+        <!-- <div class="form-group"> -->
+        <div>
+            <label >First Name</label>
+            <input  class="form-control" placeholder="First Name"
+            v-model="firstName">
+            <div v-if="errorFName != ''" class="error">
+                {{errorMsg}}
+            </div>
+        </div>
+        <div>
+            <label for="lName">Last Name</label>
+            <input  class="form-control" placeholder="Last Name"
+            v-model="lastName">
+            <div v-if="errorLName != ''" class="error">
+                    {{errorMsg}}
+            </div>
+        </div>
+        <div>
+            <label> select payment method </label>
+            <select class="form-control select" v-model="paymentMethod">
+                    <option value="cash">cash</option>
+                    <option value="credit card">credit card</option>
+            </select>
+            <div v-if="errorPayment != ''" class="error">
+                    {{errorMsg}}
+            </div>
+        </div>
+            <button class="btn" v-on:click="addCarToBag">Add car to bag</button>
+        <!-- </div> -->
+    </div>
+</div>
+</body>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            car: {},
+            firstName: '',
+            lastName: '',
+            paymentMethod: '',
+            errorFName: '',
+            errorLName: '',
+            errorPayment: '',
+            errorMsg: 'This field is compulsory',
+            showOrderForm: false,
+            carUrl: 'http://rest123/jsClient/templates/car.html?car='
+        },
+        methods: {
+            checkLogin: function () {
+                var self = this;
+                var id = this.getCookie('id');
+                var hash = this.getCookie('hash');
+                fetch('http://rest123/server/api/auth?id='+id+'&hash='+hash,{  
+                    method: 'get'})
+                .then(this.status)
+                .then(this.json)
+                .then(function(data){
+                    self.showOrderForm = data;
+                    // console.log(data);     
+                if(data == false)
+                {
+                    window.location = 'http://rest123/jsClient/templates/login.html';
+                }
+                });
+
+                // console.log(this.showOrderForm);
+            },
+            showBag: function () {
+                window.location.href = 'http://rest123/jsClient/templates/bag.html'
+            },
+            addCarToBag: function () {
+                if(this.firstName == '')
+                {
+                    this.errorFName = true;
+                }else
+                {
+                    this.errorFName = '';
+                }
+                if(this.lastName == '')
+                {
+                    this.errorLName = true;
+                }else
+                {
+                    this.errorLName = '';
+                }
+                if(this.paymentMethod == '')
+                {
+                    this.errorPayment = true;
+                }else
+                {
+                    this.errorPayment = '';
+                }
+
+                if(this.firstName != '' && this.lastName != '' && this.paymentMethod != '')
+                {
+                    var userId = JSON.stringify(this.getCookie('id'));
+                    var carId = JSON.stringify(this.$_GET('car'));
+                    var fName = JSON.stringify(this.firstName);
+                    var lName = JSON.stringify(this.lastName);
+                    var paymentMethod = JSON.stringify(this.paymentMethod);
+                    fetch('http://rest123/server/api/orders/', {
+                        method: 'post',
+                        headers: {  
+                            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+                        },  
+                        body: 'carId='+carId+'&userId='+userId+'&fName='+fName+'&lName='
+                        +lName+'&paymentMethod='+paymentMethod
+                    })
+                        .then(this.status)
+                        .then(this.json)
+                        .then(function (data) {
+                            if(data == true)
+                            {
+                                alert('car successfull ordered');
+                            }else{
+                                alert('some order error');
+                            }
+                        });
+                }
+            },
+            $_GET: function (key) {
+                var s = window.location.search;
+                s = s.match(new RegExp(key + '=([^&=]+)'));
+                return s ? s[1] : false;
+            },
+            status: function (response) { 
+                if (response.status >= 200 && response.status < 300) {  
+                    return Promise.resolve(response)  
+                } else {  
+                    return Promise.reject(new Error(response.statusText))  
+                }  
+            },
+            json: function(response,self) {
+                return response.json()  
+            },
+            getCookie: function (name) {
+                var matches = document.cookie.match(new RegExp(
+                    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+                ));
+                return matches ? decodeURIComponent(matches[1]) : undefined;
+            }
+        },
+        created () {
+            var carId = this.$_GET('car');
+            var self = this;
+            fetch('http://rest123/server/api/cars/',{  
+                    method: 'get'})
+                .then(this.status)
+                .then(this.json)
+                .then(function(data){
+                    self.car = data[0];        
+                });
+        } 
+    })
+</script>
+<style scoped>
+
+.carInfo{
+    margin-left: 100px;
+    margin-right: 100px;
+    float: left;
+}
+
+.order input, .order select{
+    display: block;
+}
+
+.error{
+    color: red;
+}
+.bag{
+    float: right;
+    margin-right: 50px;
+}
+</style>
+</html>
