@@ -10,24 +10,18 @@ class RestServer
     public function __construct()
     {
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
-//        $this->url = $_SERVER['REQUEST_URI'];
-        $this->url = '/~user14/rest1/server/api/orders/1';
+        $this->url = $_SERVER['REQUEST_URI'];
         $this->orders = new Orders();
     }
 
     public function run()
     {
         list($s, $user, $REST, $server, $api, $dir, $params) = explode("/", $this->url, 7);
-//        return $this->requestMethod;
         switch ($this->requestMethod) {
             case 'GET':
-//                $params = $_GET['userId'];
-//                return $params;
                 return $this->setMethod('get' . ucfirst($dir),$params);
                 break;
             case 'POST':
-//                $postParams = ''
-
                 $postParams['carId'] = json_decode($_POST['carId']);
                 $postParams['userId'] = json_decode($_POST['userId']);
                 $postParams['fName'] = json_decode($_POST['fName']);
@@ -48,7 +42,6 @@ class RestServer
 
     protected function setMethod($classMethod, $params)
     {
-//        return $classMethod;
         if (method_exists($this->orders, $classMethod)) {
             if ($params != null) {
 

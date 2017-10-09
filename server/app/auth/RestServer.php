@@ -10,46 +10,26 @@ class RestServer
     public function __construct()
     {
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
-        $this->url = '/~user14/rest1/server/api/auth/';
-//        $this->url = $_SERVER['REQUEST_URI'];
+        $this->url = $_SERVER['REQUEST_URI'];
         $this->auth = new Auth();
     }
 
     public function run()
     {
-//        $this->generatePut($x);
         list($s, $user, $REST, $server, $api, $dir, $login, $password) = explode("/", $this->url, 8);
-        //        var_dump($login, $password);
-//return $this->requestMethod;
         switch ($this->requestMethod) {
         case 'GET':
-             $id = $_GET['id'];
-             $hash = $_GET['hash'];
-//return $id;
-//return $hash;
-//            setcookie("id", '2', time() + 60 * 60 * 24 * 30,'/','http://rest123');
-            return $this->setMethod('get' . ucfirst($dir), $id, $hash);
+            return $this->setMethod('get' . ucfirst($dir), $login, $password);
             break;
         case 'POST':
-//            return 'dsfdsf';
             $login = json_decode($_POST['login']);
             $password = json_decode($_POST['password']);
-//            return $login;
             return $this->setMethod('post' . ucfirst($dir), $login, $password);
             break;
         case 'PUT':
-//            return 111;
             $putData = file_get_contents('php://input');
-//            return $putData;
-//            $putData = json_decode($putData);
             $loginPswd = $this->generatePut($putData);
-//            var_dump($loginPswd['login']);
-//            var_dump($loginPswd['password']);
-//            var_dump(ucfirst($dir));
-            //$login = 'imon';
-            //$password = '360557zx';
             return $this->setMethod('put' . ucfirst($dir), $loginPswd['login'], $loginPswd['password']);
-            //return $this->setMethod('put' . ucfirst($dir), $login, $password);
             break;
         case 'DELETE':
             return $this->setMethod('delete' . ucfirst($dir), $login, $password);
@@ -62,7 +42,6 @@ class RestServer
 
     protected function setMethod($classMethod, $login, $password)
     {
-//        return $classMethod;
         if (method_exists($this->auth, $classMethod)) {
             if ($login !== null && $password !== null) {
 
@@ -73,22 +52,8 @@ class RestServer
                 } else {
                     $this->sendHeaders(200);
                 }
-//                if(is_array($result))
-//                {
-////                    echo 'tutut';
-////                    header("Cookie: hash=09f85d68965fdec4c729b2bef0752d78;");
-//                    setcookie("id", $result['id'], time() + 60 * 60 );
-//                    setcookie("hash", $result['hash'], time() + 60 * 60);
-//                    $result = true;
-//                }
             } else {
                 $result = $this->auth->$classMethod();
-//                if(is_array($result))
-//                {
-//                    setcookie("id", $result['id'], time() + 60 * 60 * 24 * 30,'/');
-//                    setcookie("hash", $result['hash'], time() + 60 * 60 * 24 * 30,'/');
-//                    $result = true;
-//                }
             }
         } else {
             $this->sendHeaders(500);
@@ -108,7 +73,6 @@ class RestServer
         }
 
         return $result;
-        //var_dump($result);
     }
 
     private function sendHeaders($errorCode)

@@ -88,7 +88,7 @@
     </div>
     <div class="row text-center">
     <div class=".contentBlock">
-            <div class="col-md-4" v-for="car in cars">
+            <div class="col-md-4" v-for="car in sortCars">
                 <a :href=carUrl+car.id>
                     <p>{{car.mark}}</p>
                     <p>{{car.model}}</p>
@@ -103,7 +103,7 @@
     var app = new Vue({
         el: '#app',
         data: {
-            cars: {},
+            cars: '',
             model: '',
             year: '',
             engine: '',
@@ -113,7 +113,7 @@
             error: 'This field is compulsory',
             errorStatus: true,
             loginStatus: false,
-            carUrl: 'http://rest123/jsClient/templates/car.html?car=',
+            carUrl: 'http://192.168.0.15/~user14/rest1/jsClient/templates/car.html?car=',
             options: {
                 models: [
                     {
@@ -170,12 +170,13 @@
         },
         methods: {
             login: function () {
-                window.location = 'http://rest123/jsClient/templates/login.html';
+                window.location.href = 'http://192.168.0.15/~user14/rest1/jsClient/templates/login.html';
             },
             register: function () {
-                window.location = 'http://rest123/jsClient/templates/register.html';
+                window.location.href = 'http://192.168.0.15/~user14/rest1/jsClient/templates/register.html';
             },
             applyFilter: function () {
+                var self = this;
                 console.log(this.loginStatus);
                 var sortObj = {};
                 if(this.model != ''){
@@ -206,17 +207,18 @@
                 for(el in sortObj) {
                     urlPart += el+'='+sortObj[el]+'/';
                 }
-
-                fetch('http://rest123/server/api/cars/'+urlPart,{  
+console.log(urlPart); 
+                fetch('http://192.168.0.15/~user14/rest1/client/api/cars/'+urlPart,{  
                         method: 'get'})
                     .then(this.status)
                     .then(this.json)
                     .then(function(data){
-                        self.loginStats = data;          
-                });
+                        console.log(data);
+                        self.cars = data;         
+                    });
             },
             showBag: function () {
-                window.location.href = 'http://rest123/jsClient/templates/bag.html'
+                window.location.href = 'http://192.168.0.15/~user14/rest1/jsClient/templates/bag.html'
             },
             status: function (response) { 
                 // console.log(response.type);
@@ -241,7 +243,7 @@
         created () {
             var self = this;
                     // console.log(self.cars);
-            fetch('http://rest123/server/api/cars/',{  
+            fetch('http://192.168.0.15/~user14/rest1/client/api/cars/',{  
                     method: 'get'})
                 .then(this.status)
                 .then(this.json)
@@ -266,7 +268,7 @@
                 // console.log(this.$cookie.get)
                 // console.log(id);
                 // console.log(hash);
-                fetch('http://rest123/server/api/auth?id='+id+'&hash='+hash,{  
+                fetch('http://192.168.0.15/~user14/rest1/client/api/auth/'+id+'/'+hash,{  
                     method: 'get'})
                 .then(this.status)
                 .then(this.json)
@@ -281,6 +283,10 @@
                 // console.log(x);
                 return this.loginStatus;
                 // console.log(data);
+            },
+            sortCars () {
+                return this.cars;
+
             }
         }
 

@@ -10,26 +10,14 @@ class RestServer
     public function __construct()
     {
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
-//        $this->url = $_SERVER['REQUEST_URI'];
-        $this->url = '/~user14/rest1/server/api/cars/1';
+        $this->url = $_SERVER['REQUEST_URI'];
         $this->cars = new Cars();
     }
 
     public function run()
     {
-//        var_dump($this->url);
         list($s, $user, $REST, $server, $api, $dir, $params) = explode("/", $this->url, 7);
-        //$url = '/~user14/rest_task1/server/api/cars/123';
-//        list($s, $user, $REST, $server, $api, $dir, $params) = explode("/", $this->url, 7);
-//        //        list($s, $user, $REST, $server, $api, $dir, $params) = explode("/", $url, 7);
-//        $returnFormat = explode(".", $this->url);
-//
-//        if ($returnFormat[1] === null) {
-//            $returnFormat = 'json';
-//        } else {
-//            $returnFormat = $returnFormat[1];
-//        }
-
+        
         switch ($this->requestMethod) {
             case 'GET':
                 $returnFormat = explode(".", $this->url);
@@ -74,8 +62,8 @@ class RestServer
             return $paramStr;
         } else {
             $paramsArr = [];
-            $paramStr = explode('/', $paramStr);
-            $params = explode('&', $paramStr[0]);
+            $params = explode('/', $paramStr);
+            //$params = explode('&', $paramStr[0]);
 
             if (is_array($params)) {
 
@@ -83,11 +71,11 @@ class RestServer
                     $keyVal = explode('=', $value);
                     $paramsArr[$keyVal[0]] = $keyVal[1];
                 }
+                array_pop($paramsArr);
             } else {
                 $params = explode('=', $params);
                 $paramsArr[$params[0]] = $params[1];
             }
-
             return $paramsArr;
         }
     }

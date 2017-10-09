@@ -66,7 +66,7 @@
                 {
                     var login = JSON.stringify(this.login);
                     var password = JSON.stringify(this.password);
-                    fetch('http://rest123/server/api/auth/', {
+                    fetch('http://192.168.0.15/~user14/rest1/client/api/auth/', {
                         method: 'post',
                         headers: {  
                             "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
@@ -77,7 +77,7 @@
                         .then(this.json)
                         .then(function (data) {
                             if(data == true){
-                                window.location = 'http://rest123/jsClient/templates/login.html';
+                                window.location = 'http://192.168.0.15/~user14/rest1/jsClient/templates/login.html';
                             }else
                             {
                                 alert('register error');

@@ -67,14 +67,14 @@
             var self = this;
                 var id = this.getCookie('id');
                 var hash = this.getCookie('hash');
-                fetch('http://rest123/server/api/auth?id='+id+'&hash='+hash,{  
+                fetch('http://192.168.0.15/~user14/rest1/client/api/auth/'+id+'/'+hash,{  
                     method: 'get'})
                 .then(this.status)
                 .then(this.json)
                 .then(function(data){ 
                     if(data != false)
                     {
-                        fetch('http://rest123/server/api/orders/',{  
+                        fetch('http://192.168.0.15/~user14/rest1/client/api/orders/'+id,{  
                             method: 'get'})
                         .then(self.status)
                         .then(self.json)

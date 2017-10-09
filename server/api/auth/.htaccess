@@ -1,7 +1,7 @@
-RewriteEngine On
-#RewriteBase /~user6/rest_task1/server/api/cars
 
-RewriteBase /rest123/server/api/auth
+RewriteEngine On
+RewriteBase /~user14/rest1/server/api/auth
+#RewriteBase /rest123/server/api/cars
 #RewriteBase /server/api/cars
 
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -75,30 +75,30 @@
             errorPayment: '',
             errorMsg: 'This field is compulsory',
             showOrderForm: false,
-            carUrl: 'http://rest123/jsClient/templates/car.html?car='
+            carUrl: 'http://192.168.0.15/~user14/rest1/jsClient/templates/car.html?car='
         },
         methods: {
             checkLogin: function () {
                 var self = this;
                 var id = this.getCookie('id');
                 var hash = this.getCookie('hash');
-                fetch('http://rest123/server/api/auth?id='+id+'&hash='+hash,{  
+                fetch('http://192.168.0.15/~user14/rest1/client/api/auth/'+id+'/'+hash,{  
                     method: 'get'})
                 .then(this.status)
                 .then(this.json)
                 .then(function(data){
                     self.showOrderForm = data;
-                    // console.log(data);     
+                     console.log(data);     
                 if(data == false)
-                {
-                    window.location = 'http://rest123/jsClient/templates/login.html';
-                }
+               {
+                   window.location = 'http://192.168.0.15/~user14/rest1/jsClient/templates/login.html';
+               }
                 });
 
                 // console.log(this.showOrderForm);
             },
             showBag: function () {
-                window.location.href = 'http://rest123/jsClient/templates/bag.html'
+                window.location.href = 'http://192.168.0.15/~user14/rest1/jsClient/templates/bag.html'
             },
             addCarToBag: function () {
                 if(this.firstName == '')
@@ -130,7 +130,7 @@
                     var fName = JSON.stringify(this.firstName);
                     var lName = JSON.stringify(this.lastName);
                     var paymentMethod = JSON.stringify(this.paymentMethod);
-                    fetch('http://rest123/server/api/orders/', {
+                    fetch('http://192.168.0.15/~user14/rest1/client/api/orders/', {
                         method: 'post',
                         headers: {  
                             "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
@@ -175,7 +175,7 @@
         created () {
             var carId = this.$_GET('car');
             var self = this;
-            fetch('http://rest123/server/api/cars/',{  
+            fetch('http://192.168.0.15/~user14/rest1/client/api/cars/'+carId,{  
                     method: 'get'})
                 .then(this.status)
                 .then(this.json)

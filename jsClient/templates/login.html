@@ -66,7 +66,7 @@
                 {
                     var login = JSON.stringify(this.login);
                     var password = JSON.stringify(this.password);
-                    fetch('http://rest123/server/api/auth/', {
+                    fetch('http://192.168.0.15/~user14/rest1/client/api/auth/', {
                         method: 'put',
                         headers: {  
                             "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
@@ -79,7 +79,7 @@
                             if(data != false){
                                 document.cookie = "hash="+data.hash+'; path=/';
                                 document.cookie = "id="+data.id+'; path=/';
-                                window.location.href = 'http://rest123/jsClient/index.html';
+                                window.location.href = 'http://192.168.0.15/~user14/rest1/jsClient/index.html';
                             }else
                             {
                                 alert('wrong login or password');
